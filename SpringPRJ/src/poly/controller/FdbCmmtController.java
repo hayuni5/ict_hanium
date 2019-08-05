@@ -40,6 +40,23 @@ public class FdbCmmtController {
 		log.info(this.getClass().getName() + " end.");
 	}
 	
+	@RequestMapping(value="resFeedback/resFeedbackDelete")
+	public @ResponseBody void CommentDel(HttpSession session, HttpServletRequest request, Model modle, String commentNo) throws Exception{
+		
+		log.info(this.getClass().getName());
+		log.info(commentNo);
+		
+		try {
+			feedbackCommentService.commentDel(commentNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			log.info(this.getClass().getName() + " successfully ended.");
+		}
+		
+	
+	}
+	
 	@RequestMapping(value="resFeedback/resFeedbackListPage")
 	public String CommentListPage(HttpSession session, HttpServletRequest request, Model model, String feedbackNo) throws Exception {
 		
@@ -48,12 +65,17 @@ public class FdbCmmtController {
 		
 		List<FeedbackCommentDTO> fcDTO = feedbackCommentService.fcList(feedbackNo);
 	
+		FeedbackCommentDTO elementDTO = new FeedbackCommentDTO();
+		
+		
 		model.addAttribute("fcDTO", fcDTO);
 		
 		log.info("end : " + this.getClass().getName());
 		
 		return "/resFeedback/resFeedbackList";
 	}
+	
+	
 	
 	
 	

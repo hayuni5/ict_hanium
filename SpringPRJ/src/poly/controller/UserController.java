@@ -22,6 +22,35 @@ public class UserController {
 	@Resource(name = "UserService")
 	private IUserService userService;
 
+	@RequestMapping(value="login")
+	public String Login() throws Exception{
+		log.info("accessed login");
+
+		return "/login";
+	}
+	
+	@RequestMapping(value="menu")
+	public String Menu() throws Exception{
+		log.info("accessed login");
+
+		return "/menu";
+	}
+	
+	
+	@RequestMapping(value="index")
+	public String Index(HttpSession session) {
+		String userNo = (String)session.getAttribute("userNo");
+		log.info("userno : " + session.getAttribute("userNo"));
+		log.info(this.getClass());
+		
+		if(userNo==null) {
+			return "/login";
+		}else {
+			return "/home";
+		}
+		
+	}
+	
 	@RequestMapping(value = "UserReg")
 	public String UserReg() throws Exception {
 		log.info("accessed UserReg");
@@ -107,7 +136,7 @@ public class UserController {
 		return result;
 	}
 	
-	@RequestMapping(value="UserLogin", method = RequestMethod.POST)
+	@RequestMapping(value="UserLogin")
 	public String login(ModelMap model, HttpServletRequest request, HttpSession session) throws Exception{
 		log.info("UserLogin");
 		

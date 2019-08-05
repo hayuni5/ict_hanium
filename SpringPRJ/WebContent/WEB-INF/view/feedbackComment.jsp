@@ -13,14 +13,14 @@
 </head>
 <body>
 	<div style="width: auto; text-align:center; ">
-	<%-- <c:if test="${sessionScope.userid != null }">  --%>
+	  
 		<textarea rows="5" cols="80" id="commenttext"
 		placeholder="들어본 후 회원님의 평가를 남겨주세요!"></textarea>
 		<br>
 		<button type="button" id="commentreg">댓글쓰기</button>
-	<%-- </c:if> --%>
+	
 	</div>
-	<div id="commentlist">댓</div>
+	<div id="commentlist"></div>
 	
 </body>	
 <script>
@@ -29,9 +29,10 @@
 			commentReg:$('#commentreg'),		
 			commentEdit:$('#commentedit'),
 			commentDel:$('#commentdel'),
-			commentList:$('#commentlist')
+			commentList:$('#commentlist'),
+			
 	}
-	
+	console.log("current feedback : " + <%=feedback_no%>);
 	//댓글불러오기
 	function commentListPage() {
 		$.ajax({
@@ -85,10 +86,38 @@
 				commentListPage();
 			}
 		
-		})
+		});
 	}
 	
+	function commentedit(commentNo){
+		console.log(commentNo);
+		var edit_cont = '';
+	}
 	
+	function commentdel(commentNo) {
+		
+		console.log(commentNo);
+		
+		var result = confirm('댓글을 삭제하시겠습니까?');
+			if(result) {
+			//댓글 삭제 처리
+				$.ajax({
+					type: "post",
+					url: "${path}/resFeedback/resFeedbackDelete.do",
+					data: {
+						"commentNo" : commentNo
+					},
+					error: function(){
+						alert("통신 실패");
+					},
+					success: function(data){
+						console.log(data);
+						commentListPage();
+				}
+					
+			})
+		}
+	}
 
 </script>
 
