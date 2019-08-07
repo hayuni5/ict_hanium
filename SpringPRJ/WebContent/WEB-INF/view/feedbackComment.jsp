@@ -25,10 +25,8 @@
 </body>	
 <script>
 	const selector = {
-			commentText:$('#commenttext'),
+			commentText:$('#commenttext'), //댓글 최초 작성내용
 			commentReg:$('#commentreg'),		
-			commentEdit:$('#commentedit'),
-			commentDel:$('#commentdel'),
 			commentList:$('#commentlist'),
 			
 	}
@@ -53,14 +51,13 @@
 	
 	$(function(){
 		selector.commentReg.click(function(){
-			commentreg();
+			commentReg();
 		});
-		
 	});
 	
 	
-	//댓글작성
-	function commentreg() {
+	//댓글최초작성
+	function commentReg() {
 		var commenttext=selector.commentText.val(); //댓글내용
 		var feedbackNo= <%=feedback_no %>; //게시물번호
 		var commentInfo = {
@@ -89,12 +86,58 @@
 		});
 	}
 	
-	function commentedit(commentNo){
+	function commentEdit(commentNo){
 		console.log(commentNo);
 		var edit_cont = '';
+		//일단 따라써보고 실험해보기.
+		
+		edit_cont += '<div>';
+		edit_cont += '<div>';
+		edit_cont += '<textarea id="commentTextEdit" rows="5" cols="80">';
+		edit_cont += '$("#commentContent"+commentNo).html();' //내용을 불러와... 바닐라js의 .innerHTML과 비슷
+		edit_cont += '</textarea>';
+		edit_cont += '<div style="text-align: right;">';
+		edit_cont += '<button type="button" style="cursor:pointer;" onclick="commentListPage()">취소</button>';
+		edit_cont += '<button type="button" style="cursor:pointer;" onclick="commentEditProc(commentNo)">수정</button>';
+		edit_cont += '</div>';
+		edit_cont += '</div>';
+		edit_cont += '</div>';
+		
+		$('#'+commentNo).html(function(){return edit_cont});
 	}
 	
-	function commentdel(commentNo) {
+	function commentEditProc(commentNo) {
+		var editedContent = $('#commentContent'+commentNo).val(),
+			 regNo = <%=rDTO.getRegno%>; 
+		
+		if($('#commentTextEdit'.val()=='')) {
+			alert('댓글 수정 실패');
+			return false;
+		}
+		
+		$.ajax({
+			type: "post",
+			url: "/resFeedback/resFeedbackEdit.do",
+			data: { //url 타고 db로 보낼 내용들.
+					/* commentNo를 매개변수로 받았으니, 쿼리문 where절에 들어가고
+						commentContent 변경
+						userNo도 일단ㅇㅇ
+					*/
+					
+					
+				
+			},
+			error: function() {
+				alert('통신실패');
+			},
+			succcess: function
+				
+		})
+		
+		//if에서 걸러지지 않고 제대로 실행됐을 경우
+	}
+	
+	function commentDel(commentNo) {
 		
 		console.log(commentNo);
 		
