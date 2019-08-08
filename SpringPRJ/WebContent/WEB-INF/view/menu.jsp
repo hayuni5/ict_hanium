@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<!-- 왼쪽 상단 robust 아이콘 설정  -->
-    <!-- navbar-fixed-top-->
+
+
     <nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-semi-dark navbar-shadow">
       <div class="navbar-wrapper">
         <div class="navbar-header">
@@ -126,7 +119,7 @@
               
               <!-- 사용자 정보관리창 설정 -->
               <li class="dropdown dropdown-user nav-item"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link"><span class="avatar avatar-online"><img src="/resources/app-assets/images/portrait/small/avatar-s-1.png" alt="avatar"><i></i></span><span class="user-name"><%=id %>님</span></a>
-                <div class="dropdown-menu dropdown-menu-right"><a href="#" class="dropdown-item"><i class="icon-head"></i>정보 수정</a><a href="#" class="dropdown-item"><i class="icon-mail6"></i>메일함</a><a href="#" class="dropdown-item"><i class="icon-clipboard2"></i>할 일</a><a href="#" class="dropdown-item"><i class="icon-calendar5"></i>캘린더</a>
+                <div class="dropdown-menu dropdown-menu-right"><a href="/UserEdit.do" class="dropdown-item"><i class="icon-head"></i>정보 수정</a><a href="#" class="dropdown-item"><i class="icon-mail6"></i>메일함</a><a href="#" class="dropdown-item"><i class="icon-clipboard2"></i>할 일</a><a href="#" class="dropdown-item"><i class="icon-calendar5"></i>캘린더</a>
                   <div class="dropdown-divider"></div><a href="/logout.do" class="dropdown-item"><i class="icon-power3"></i>로그아웃</a>
                 </div>
               </li>
@@ -178,7 +171,7 @@
               </li>
               <li><a href="layout-static.html" data-i18n="nav.page_layouts.static_layout" class="menu-item">개인 정보</a>
               <ul class="menu-content">
-                  <li><a href="error-400.html" data-i18n="nav.error_pages.error_400" class="menu-item">개인정보 수정</a>
+                  <li><a href="/UserEdit.do" data-i18n="nav.error_pages.error_400" class="menu-item">개인정보 수정</a>
                   </li>
                   <li><a href="error-401.html" data-i18n="nav.error_pages.error_401" class="menu-item">회원 탈퇴</a>
                   </li>
@@ -190,12 +183,12 @@
             <ul class="menu-content">
               <li><a href="invoice-template.html" data-i18n="nav.invoice.invoice_template" class="menu-item">면접 질문 세트 선택</a>
               <ul class="question-set-select">
-                  <li><a href="" class="set-popular">인기 세트</a></li>
-                  <li><a href="" class="set-recommend">추천 세트</a></li>
-                  <li><a href="" class="set-new">신규 세트</a></li>
+                  <li><a href="/qset/QSetList.do" class="set-popular">인기 세트</a></li>
+                  <li><a href="/qset/QSetList.do" class="set-recommend">추천 세트</a></li>
+                  <li><a href="/qset/QSetList.do" class="set-new">신규 세트</a></li>
               </ul>
               </li>
-              <li><a href="gallery-grid.html" data-i18n="nav.gallery_pages.gallery_grid" class="menu-item">면접 질문 세트 작성</a>
+              <li><a href="/qset/CreateQSet.do" data-i18n="nav.gallery_pages.gallery_grid" class="menu-item">면접 질문 세트 작성</a>
               </li>
               <li><a href="search-page.html" data-i18n="nav.search_pages.search_page" class="menu-item">모의면접 진행</a>
               </li>
@@ -234,12 +227,9 @@
         
         </ul>
       </div>
+      </div>
       <!-- /main menu content-->
       <!-- main menu footer-->
       <!-- include includes/menu-footer-->
       <!-- main menu footer-->
-    </div>
-    <!-- / main menu-->
 
-</body>
-</html>
